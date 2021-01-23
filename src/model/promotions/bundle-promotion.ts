@@ -3,6 +3,10 @@ import { Promotion } from "./promotion";
 import * as Collections from 'typescript-collections';
 import { Product } from "../product";
 
+/**
+ * A bundle promotion requires a number of different products present in the cart,
+ * providing a special price for the combination.
+ */
 export class BundlePromotion implements Promotion{
 
     requiredItems = new Collections.Dictionary<Product, number>();
@@ -13,6 +17,10 @@ export class BundlePromotion implements Promotion{
         this.bundlePrice = price;
     }
 
+    /**
+     * Overview of the content of the instance
+     * @returns string with a quick overview of the contents
+     */
     getOverview():string{
         let overview = `Bundle promotion (${this.bundlePrice})`;
         this.requiredItems.forEach(requiredProduct => {
@@ -38,6 +46,13 @@ export class BundlePromotion implements Promotion{
         this.requiredItems.setValue(product, amount);
     }
 
+    /**
+     * Checks if the promotion applies (if the required products are present in the cart) and applies a 
+     * discount. The price of the items will be modified - and the last item will be assigned the "bundlePrice"
+     * as product price.
+     * @param cart
+     * @returns number, cart The discount applied and the modified cart - after the promotion has been applied 
+     */
     calculateDiscount(cart: Cart): [number, Cart] {
         if (!this.doesCartHaveAllProducts(cart)){
             return [0, cart];
@@ -73,6 +88,11 @@ export class BundlePromotion implements Promotion{
         }
     }
 
+    /**
+     * Checks if the required items are present in the cart
+     * @param cart 
+     * @returns true if the required items are present
+     */
     public doesCartHaveAllProducts(cart: Cart): boolean {
         let allProducts = true;
         this.requiredItems.forEach(element => {
@@ -84,6 +104,11 @@ export class BundlePromotion implements Promotion{
         return allProducts;
     }
 
+    /**
+     * Internally uses doesCartHaveAllProducts
+     * @see doesCartHaveAllProducts
+     * @param cart 
+     */
     public isApplicable(cart: Cart): boolean{
         return this.doesCartHaveAllProducts(cart);
     }

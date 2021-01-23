@@ -2,6 +2,17 @@ import { Product } from "./product";
 import * as Collections from 'typescript-collections';
 
 
+/**
+ * This class keeps track of the items in the cart a shopping session.
+ * Every product present in the cart is at least once.
+ * The modifications in the cart are done via add/remove methods, no direct modification of the
+ * internal items is allowed.
+ * 
+ * Updates to the content is also allowed via update methods (for price and product)
+ * 
+ * @see add 
+ * @see remove
+ */
 export class Cart {
 
     protected cartItems: Collections.Dictionary<Product, number>;
@@ -70,6 +81,10 @@ export class Cart {
         return this.cartItems;
     }
 
+    /**
+     * Returns the amount of a given product in the cart
+     * @param product 
+     */
     public getProductAmount(product : Product) : number {
         if (this.cartItems.containsKey(product)){
             return this.cartItems.getValue(product) as number;
@@ -78,10 +93,20 @@ export class Cart {
         }
     }
 
+    /**
+     * Updates the amount of a product in the cart
+     * @param product to edit
+     * @param amount to set in the given product
+     */
     public updateProductAmount(product: Product, amount: number): void {
         this.cartItems.setValue(product, amount);
     }
 
+    /**
+     * Modifies the price of a product in the cart
+     * @param product to edit
+     * @param price to set in the given product
+     */
     public updateProductPrice(product: Product, price: number): void {
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const amount = this.cartItems.getValue(product)!;
@@ -90,6 +115,10 @@ export class Cart {
         this.cartItems.setValue(product, amount);
     }
 
+    /**
+     * Returns the total price without any promotion considered
+     * @returns total price of the items in the cart
+     */
     public getTotalPrice(): number{
         let totalPrice = 0;
         this.cartItems.forEach(function (product, amount){
@@ -102,6 +131,11 @@ export class Cart {
         return this.getCartItems().containsKey(product);
     }
 
+    /**
+     * Provides a new instance of the class Cart with the same contents
+     * The prototype will retain the same methods and cart contents
+     * @returns (deep) copy of the instance
+     */
     public getCartClone(): Cart {
         const newCart = new Cart();
         this.cartItems.forEach(function (product, amount){
@@ -110,6 +144,10 @@ export class Cart {
         return newCart;
     }
 
+    /**
+     * Overview of the content of the instance
+     * @returns string with a quick overview of the contents
+     */
     public getOverview(): string{
         let overview = '';
         this.cartItems.forEach(function (product, amount){

@@ -42,7 +42,35 @@ describe("PromotionEngine", () => {
             testCart.add(pC, 1);
 
             const result = promotionEngine.getDiscountedPrice(testCart, activePromotions);
+            // 100 - 100
             result.should.be.equal(0);
+
+        });
+
+        it("5A, 5B, 1C = 370", () => {
+
+            testCart.add(pA, 5);
+            testCart.add(pB, 5);
+            testCart.add(pC, 1);
+
+            const result = promotionEngine.getDiscountedPrice(testCart, activePromotions);
+            const discountedPrice = testCart.getTotalPrice() - result;
+            // 420 vs 370
+            discountedPrice.should.be.equal(370);
+
+        });
+
+        it("3A, 5B, 1C, 1D = 370", () => {
+
+            testCart.add(pA, 5);
+            testCart.add(pB, 5);
+            testCart.add(pC, 1);
+            testCart.add(pD, 1);
+
+            const result = promotionEngine.getDiscountedPrice(testCart, activePromotions);
+            const discountedPrice = testCart.getTotalPrice() - result;
+            // 335 vs 280
+            discountedPrice.should.be.equal(280);
 
         });
     });

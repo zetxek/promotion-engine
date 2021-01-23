@@ -9,10 +9,10 @@ import * as Collections from 'typescript-collections';
 
 describe("PromotionEngine", () => { 
 
-    const pA = new Product("A", 50);
-    const pB = new Product("B", 30);
-    const pC = new Product("C", 20);
-    const pD = new Product("C", 15);
+    let pA = new Product("A", 50);
+    let pB = new Product("B", 30);
+    let pC = new Product("C", 20);
+    let pD = new Product("D", 15);
 
     let testCart : Cart;
     let promotionEngine : PromotionEngine;
@@ -31,19 +31,27 @@ describe("PromotionEngine", () => {
     beforeEach(() => {
         testCart = new Cart();
         promotionEngine = new PromotionEngine();
+
+        pA = new Product("A", 50);
+        pB = new Product("B", 30);
+        pC = new Product("C", 20);
+        pD = new Product("D", 15);
+
+    
     });
 
-    describe("PromotionEngine", () => { 
+    describe("Validating sample carts", () => { 
 
-        it("1A, 1B, 1C = 100", () => {
+        it("(no promotions) 1A, 1B, 1C = 100", () => {
 
             testCart.add(pA, 1);
             testCart.add(pB, 1);
             testCart.add(pC, 1);
 
             const result = promotionEngine.getDiscountedPrice(testCart, activePromotions);
+            const discountedPrice = testCart.getTotalPrice() - result;
             // 100 - 100
-            result.should.be.equal(0);
+            discountedPrice.should.be.equal(100);
 
         });
 
@@ -62,7 +70,7 @@ describe("PromotionEngine", () => {
 
         it("3A, 5B, 1C, 1D = 370", () => {
 
-            testCart.add(pA, 5);
+            testCart.add(pA, 3);
             testCart.add(pB, 5);
             testCart.add(pC, 1);
             testCart.add(pD, 1);

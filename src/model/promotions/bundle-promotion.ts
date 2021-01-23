@@ -13,6 +13,14 @@ export class BundlePromotion implements Promotion{
         this.bundlePrice = price;
     }
 
+    getOverview():string{
+        let overview = `Bundle promotion (${this.bundlePrice})`;
+        this.requiredItems.forEach(requiredProduct => {
+            overview += `\n- ${requiredProduct.sku}`
+        });
+        return overview;
+    }
+
     /**
      * Adds (or replaces) the amount of items of type Product for the promotion
      * @param product Product type that should be discounted
@@ -36,7 +44,9 @@ export class BundlePromotion implements Promotion{
         }
 
         let oldPrice = 0;
+        let counter = 0;
         this.requiredItems.forEach(requiredProduct => {
+            counter++;
             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
             const requiredAmount = this.requiredItems.getValue(requiredProduct)!;
             
@@ -44,6 +54,11 @@ export class BundlePromotion implements Promotion{
             oldPrice = oldPrice + totalPrice;
 
             cart.updateProductAmount(requiredProduct, requiredAmount);
+            if (counter < this.requiredItems.size()){
+                cart.updateProductPrice(requiredProduct, 0);
+            }else{
+                cart.updateProductPrice(requiredProduct, this.bundlePrice);
+            }
         });      
 
         const discount = oldPrice - this.bundlePrice;

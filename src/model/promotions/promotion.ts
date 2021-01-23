@@ -4,6 +4,7 @@ import * as Collections from 'typescript-collections';
 export interface Promotion {
     isApplicable(cart: Cart) : boolean;
     calculateDiscount(cart: Cart): [number,Cart];
+    getOverview(): string;
 }
 
 export abstract class PromotionBase {

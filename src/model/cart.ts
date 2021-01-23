@@ -82,6 +82,14 @@ export class Cart {
         this.cartItems.setValue(product, amount);
     }
 
+    public updateProductPrice(product: Product, price: number): void {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        const amount = this.cartItems.getValue(product)!;
+        this.cartItems.remove(product);
+        product.price = price;
+        this.cartItems.setValue(product, amount);
+    }
+
     public getTotalPrice(): number{
         let totalPrice = 0;
         this.cartItems.forEach(function (product, amount){
@@ -89,7 +97,7 @@ export class Cart {
         });
         return totalPrice;  
     }
-    
+
     public hasProduct(product: Product) : boolean{
         return this.getCartItems().containsKey(product);
     }
@@ -100,6 +108,14 @@ export class Cart {
             newCart.add(product, amount);
         });
         return newCart;
+    }
+
+    public getOverview(): string{
+        let overview = '';
+        this.cartItems.forEach(function (product, amount){
+            overview += `\n${product.sku} x ${amount} (total ${product.price * amount})`
+        });
+        return overview;
     }
 
 }

@@ -30,23 +30,24 @@ export class BundlePromotion implements Promotion{
         this.requiredItems.setValue(product, amount);
     }
 
-    calculateDiscount(cart: Cart): number {
+    calculateDiscount(cart: Cart): [number, Cart] {
         if (!this.doesCartHaveAllProducts(cart)){
-            return 0;
+            return [0, cart];
         }
 
         let oldPrice = 0;
-        this.requiredItems.forEach(element => {
-            const productPrice = this.requiredItems.getValue(element) ?
-            this.requiredItems.getValue(element) : 0;
-     
+        this.requiredItems.forEach(requiredProduct => {
             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            const totalPrice = element.price * productPrice!;
+            const requiredAmount = this.requiredItems.getValue(requiredProduct)!;
+            
+            const totalPrice = requiredProduct.price * requiredAmount;
             oldPrice = oldPrice + totalPrice;
+
+            cart.updateProductAmount(requiredProduct, requiredAmount);
         });      
 
         const discount = oldPrice - this.bundlePrice;
-        return discount;
+        return [discount, cart];
     }
 
     getRequiredProductAmount(product: Product): number {
@@ -57,15 +58,19 @@ export class BundlePromotion implements Promotion{
         }
     }
 
-    public doesCartHaveAllProducts(cart: Cart) : boolean {
+    public doesCartHaveAllProducts(cart: Cart): boolean {
         let allProducts = true;
         this.requiredItems.forEach(element => {
             const reqAmount = this.getRequiredProductAmount(element);
-            if (!cart.getCartItems().containsKey(element) || (reqAmount > cart.getProductAmount(element)) ){
+            if (!cart.hasProduct(element) || (reqAmount > cart.getProductAmount(element)) ){
                 allProducts = false;
             }
         });
         return allProducts;
+    }
+
+    public isApplicable(cart: Cart): boolean{
+        return this.doesCartHaveAllProducts(cart);
     }
 
 }

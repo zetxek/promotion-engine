@@ -77,4 +77,29 @@ export class Cart {
             return 0;        
         }
     }
+
+    public updateProductAmount(product: Product, amount: number): void {
+        this.cartItems.setValue(product, amount);
+    }
+
+    public getTotalPrice(): number{
+        let totalPrice = 0;
+        this.cartItems.forEach(function (product, amount){
+            totalPrice = totalPrice + (product.price * amount);
+        });
+        return totalPrice;  
+    }
+    
+    public hasProduct(product: Product) : boolean{
+        return this.getCartItems().containsKey(product);
+    }
+
+    public getCartClone(): Cart {
+        const newCart = new Cart();
+        this.cartItems.forEach(function (product, amount){
+            newCart.add(product, amount);
+        });
+        return newCart;
+    }
+
 }

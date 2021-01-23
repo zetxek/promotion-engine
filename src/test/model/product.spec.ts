@@ -1,7 +1,7 @@
 import "mocha"
 import "should"
 
-import { Product } from "../model/product";
+import { Product } from "../../model/product";
 
 describe("Product", () => { 
 

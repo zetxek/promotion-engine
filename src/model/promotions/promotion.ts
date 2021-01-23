@@ -1,5 +1,6 @@
 import { Cart } from "../cart";
 
 export interface Promotion {
-    calculateDiscount(cart: Cart): number;
+    isApplicable(cart: Cart) : boolean;
+    calculateDiscount(cart: Cart): [number,Cart];
 }

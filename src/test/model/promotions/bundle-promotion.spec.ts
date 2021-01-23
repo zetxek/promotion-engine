@@ -1,14 +1,15 @@
 import "mocha"
 import "should"
-import { Cart } from "../../model/cart";
-import { Product } from "../../model/product";
-import { BundlePromotion } from "../../model/promotions/bundle-promotion";
+import { Cart } from "../../../model/cart";
+import { Product } from "../../../model/product";
+import { BundlePromotion } from "../../../model/promotions/bundle-promotion";
 import * as Collections from 'typescript-collections';
 
 
 describe("BundlePromotion", () => { 
 
-    describe("BundlePromotion (C&D=30)", () => {
+    
+    describe("BundlePromotion", () => { 
         
         it("should get a discount of 15", () => {
 
@@ -25,7 +26,7 @@ describe("BundlePromotion", () => {
             cart.add(pC, 1);
             cart.add(pD, 1);
 
-            promotion.calculateDiscount(cart).should.be.equal(5);
+            promotion.calculateDiscount(cart)[0].should.be.equal(5);
         });
         
     });

@@ -69,4 +69,12 @@ export class Cart {
     public getCartItems() : Collections.Dictionary<Product, number> {
         return this.cartItems;
     }
+
+    public getProductAmount(product : Product) : number {
+        if (this.cartItems.containsKey(product)){
+            return this.cartItems.getValue(product) as number;
+        }else{
+            return 0;        
+        }
+    }
 }

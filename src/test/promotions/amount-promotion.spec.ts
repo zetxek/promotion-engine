@@ -1,8 +1,8 @@
 import "mocha"
 import "should"
-import { Cart } from "../../cart";
-import { Product } from "../../product";
-import { AmountPromotion } from "../../promotions/amount-promotion";
+import { Cart } from "../../model/cart";
+import { Product } from "../../model/product";
+import { AmountPromotion } from "../../model/promotions/amount-promotion";
 
 
 describe("AmountPromotion", () => { 

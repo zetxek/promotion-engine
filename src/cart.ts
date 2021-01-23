@@ -3,6 +3,7 @@ import * as Collections from 'typescript-collections';
 
 
 export class Cart {
+
     protected cartItems: Collections.Dictionary<Product, number>;
 
     constructor(){
@@ -60,5 +61,12 @@ export class Cart {
             totalCount = totalCount + amount;
         });
         return totalCount;
+    }
+
+    /**
+     * Returns the contents in the cart
+     */
+    public getCartItems() : Collections.Dictionary<Product, number> {
+        return this.cartItems;
     }
 }

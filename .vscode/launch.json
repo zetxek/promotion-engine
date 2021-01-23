@@ -1,15 +1,23 @@
 {
     "version": "0.2.0",
     "configurations": [
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "Mocha Tests",
-      "program": "npm run test",
-      "internalConsoleOptions": "openOnSessionStart",
-      "skipFiles": [
-        "<node_internals>/**"
-      ]
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "Mocha All",
+        "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+        "args": [
+            "-r",
+            "ts-node/register",
+            "--timeout",
+            "999999",
+            "--colors",
+            "--recursive",
+            "\"${workspaceFolder}/src/test/**/*spec.ts\"",
+        ],
+        "console": "integratedTerminal",
+        "internalConsoleOptions": "neverOpen",
+        "protocol": "inspector"
     },
     {
         "type": "node",

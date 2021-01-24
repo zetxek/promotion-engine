@@ -53,6 +53,7 @@ The promotion engine should be modular to allow for more promotion types to be a
 # Project design
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/2b6289bb0bbd5f171c40/maintainability)](https://codeclimate.com/github/zetxek/promotion-engine/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/2b6289bb0bbd5f171c40/test_coverage)](https://codeclimate.com/github/zetxek/promotion-engine/test_coverage)
 
 The project is extendable in terms of promotions via a Strategy pattern - with each promotion type implementing the specific strategy for a given cart.
 

@@ -3,9 +3,9 @@ import "should"
 import { Cart } from "../../../model/cart";
 import { Product } from "../../../model/product";
 import { BundlePromotion } from "../../../model/promotions/bundle-promotion";
-import { PromotionEngine } from "../../../manager/promotion-engine";
 import { AmountPromotion } from "../../../model/promotions/amount-promotion";
 import * as Collections from 'typescript-collections';
+import { DefaultPromotionEngine } from "../../../manager/promotion-engine";
 
 describe("PromotionEngine", () => { 
 
@@ -15,7 +15,7 @@ describe("PromotionEngine", () => {
     let pD = new Product("D", 15);
 
     let testCart : Cart;
-    let promotionEngine : PromotionEngine;
+    let promotionEngine : DefaultPromotionEngine;
 
     const discountedItems = new Collections.Dictionary<Product, number>();
     discountedItems.setValue(pC, 1);
@@ -30,7 +30,7 @@ describe("PromotionEngine", () => {
     
     beforeEach(() => {
         testCart = new Cart();
-        promotionEngine = new PromotionEngine();
+        promotionEngine = new DefaultPromotionEngine();
 
         pA = new Product("A", 50);
         pB = new Product("B", 30);

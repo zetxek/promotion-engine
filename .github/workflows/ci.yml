@@ -40,8 +40,9 @@ jobs:
         node-version: '12'
     - run: npm install
     - run: npm build
-    - uses: paambaati/codeclimate-action@v2.5.7
-      env:
-        CC_TEST_REPORTER_ID: ${{ secrets.CC_COVERAGE_REPORTER }}
+    - run: npm run coverage
+    - name: Code Climate Test Reporter
+      uses: aktions/codeclimate-test-reporter@v1
       with:
-        coverageCommand: npm run coverage
+        codeclimate-test-reporter-id: ${{ secrets.CC_COVERAGE_REPORTER }}
+        command: after-build

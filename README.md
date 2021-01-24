@@ -53,7 +53,10 @@ The promotion engine should be modular to allow for more promotion types to be a
 # Project design
 
 The project is extendable in terms of promotions via a Strategy pattern - with each promotion type implementing the specific strategy for a given cart.
+
 The promotion engine is an interface, and a default implementation is provider - with a simple exclusive calculation (once a given promotion is found, the product is not considered for other promotions).
+
+Additional elements could also be further decoupled from the specific implementation (Product, Cart...).
 
 Typescript is used as language - which is great for testability of the code compared to vanilla Javascript, although it also poses a challenge in the copy operation for he elements of a collection.
 

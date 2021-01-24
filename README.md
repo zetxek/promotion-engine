@@ -48,3 +48,83 @@ The promotion engine should be modular to allow for more promotion types to be a
 
 **Total**
 280
+
+
+# Project design
+
+The project is extendable in terms of promotions via a Strategy pattern - with each promotion type implementing the specific strategy for a given cart.
+The promotion engine is an interface, and a default implementation is provider - with a simple exclusive calculation (once a given promotion is found, the product is not considered for other promotions).
+
+Typescript is used as language - which is great for testability of the code compared to vanilla Javascript, although it also poses a challenge in the copy operation for he elements of a collection.
+
+As an IDE, you will find default configuration for VSCode - where the test runner is setup directly as a "Run option"
+# How to run
+
+## Pre-requirements
+
+1. Install dependencies: `npm i`
+2. Setup node v11 (_the project has not been tested in other node versions_)
+## Run test cases
+
+To start the test suite you can execute the following command:
+```
+npm run test
+```
+
+Sample output:
+```
+npm run test
+
+> promotion-engine@1.0.0 test /Users/zetxek/Documents/Projects/promotion-engine
+> mocha -r ts-node/register --recursive "src/**/*.spec.ts"
+
+
+
+  HelloWorld
+    Say hi, ()
+      ✓ should say Hello, adrian
+      ✓ should say Hello, world
+
+  Cart
+    Creates an empty cart
+      ✓ should create an empty cart
+    Creates a cart and adds products
+      ✓ should add an item
+      ✓ should add an item, allow add/remove operations
+      ✓ should handle item removal then amount = 0
+
+  PromotionEngine
+    Validating sample carts
+      ✓ (no promotions) 1A, 1B, 1C = 100
+      ✓ 5A, 5B, 1C = 370
+      ✓ 3A, 5B, 1C, 1D = 370
+
+  Product
+    Product A,50  ()
+      ✓ should create a Product A with price 50
+      ✓ should create a Product B with price 50 and change to 30
+
+  AmountPromotion
+    AmountPromotion(A,3,130)
+      ✓ should get a discount of 20
+    AmountPromotion(B,2,45)
+      ✓ should get a discount of 15
+      ✓ should get a discount of 30
+
+  BundlePromotion
+    BundlePromotion
+      ✓ should get a discount of 15
+
+
+  15 passing (1s)
+  ```
+
+  ## Roadmap/improvements
+
+  There are a series of items to improve, a showcase of some:
+  - [CI/CD (via Github actions, for example)](https://github.com/zetxek/promotion-engine/issues/9)
+  - [Code coverage reports](https://github.com/zetxek/promotion-engine/issues/10)
+  - [Dependency cleanup](https://github.com/zetxek/promotion-engine/issues/11)
+  - [Review node compatibility](https://github.com/zetxek/promotion-engine/issues/12)
+
+  For a complete, up-to-date list, check [the issues queue](https://github.com/zetxek/promotion-engine/issues).

@@ -24,17 +24,22 @@ describe("Cart", () => {
             tested.getTotalCount().should.be.equal(1);
             tested.getUniqueCount().should.be.equal(1);
         });
+    });
+
+    describe("Creates a cart and updates/removes products", () => {
 
         it("should add an item, allow add/remove operations", () => {
             const pB = new Product("B", 30);
             tested.add(pB, 1);
-
             tested.add(pB, 5);
 
             tested.getTotalCount().should.be.equal(6);
 
             tested.remove(pB, 2);
             tested.getTotalCount().should.be.equal(4);
+
+            tested.remove(pB, 5);
+            tested.getTotalCount().should.be.equal(0);
 
         });
 
@@ -46,6 +51,19 @@ describe("Cart", () => {
             tested.getTotalCount().should.be.equal(0);
             tested.getUniqueCount().should.be.equal(0);
         });
+
+        it("shouldn't allow negative ammounts", () => {
+            const pB = new Product("B", 30);
+            tested.add(pB, 30);
+            tested.remove(pB, 31);
+            tested.getTotalCount().should.be.equal(0);
+
+            tested.add(pB, 30);
+            tested.updateProductAmount(pB, -1);
+            tested.getTotalCount().should.be.equal(0);
+
+        });
     });
+    
 
 });

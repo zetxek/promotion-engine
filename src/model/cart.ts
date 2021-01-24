@@ -48,11 +48,7 @@ export class Cart {
             const oldAmount = this.cartItems.getValue(product) as number;
             const newAmount = oldAmount - amount >= 0 ? oldAmount - amount : 0;
         
-            if (newAmount > 0){
-                this.cartItems.setValue(product, newAmount);
-            }else{
-                this.cartItems.remove(product);
-            }
+            this.updateProductAmount(product, newAmount);
         }
     }
 
@@ -98,8 +94,12 @@ export class Cart {
      * @param product to edit
      * @param amount to set in the given product
      */
-    public updateProductAmount(product: Product, amount: number): void {
-        this.cartItems.setValue(product, amount);
+    public updateProductAmount(product: Product, newAmount: number): void {
+        if (newAmount > 0){
+            this.cartItems.setValue(product, newAmount);
+        }else{
+            this.cartItems.remove(product);
+        }
     }
 
     /**

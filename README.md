@@ -58,6 +58,9 @@ The promotion engine is an interface, and a default implementation is provider -
 Typescript is used as language - which is great for testability of the code compared to vanilla Javascript, although it also poses a challenge in the copy operation for he elements of a collection.
 
 As an IDE, you will find default configuration for VSCode - where the test runner is setup directly as a "Run option"
+
+![VSCode test runner](resources/vscode-tests.gif)
+
 # How to run
 
 ## Pre-requirements

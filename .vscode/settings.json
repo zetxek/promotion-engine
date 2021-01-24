@@ -1,7 +1,10 @@
 {
-    "mocha.files.glob": "src/**/*.spec.ts",
-    "mocha.options": { "compilers": { "ts": "ts-node/register" } },
-    "mocha.requires": ["ts-node/register"],
-    "mocha.runTestsOnSave": "true",
-  }
-  
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.validate": ["typescript"],
+  "mocha.files.glob": "src/**/*.spec.ts",
+  "mocha.options": { "compilers": { "ts": "ts-node/register" } },
+  "mocha.requires": ["ts-node/register"],
+  "mocha.runTestsOnSave": "true"
+}

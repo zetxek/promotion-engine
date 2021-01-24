@@ -1,7 +1,7 @@
-import { Cart } from "../cart";
-import { Promotion } from "./promotion";
+import {Cart} from '../cart';
+import {Promotion} from './promotion';
 import * as Collections from 'typescript-collections';
-import { Product } from "../product";
+import {Product} from '../product';
 
 /**
  * A bundle promotion requires a number of different products present in the cart,
@@ -25,7 +25,7 @@ export class BundlePromotion implements Promotion {
    */
   getOverview(): string {
     let overview = `Bundle promotion (${this.bundlePrice})`;
-    this.requiredItems.forEach((requiredProduct) => {
+    this.requiredItems.forEach(requiredProduct => {
       overview += `\n- ${requiredProduct.sku}`;
     });
     return overview;
@@ -62,7 +62,7 @@ export class BundlePromotion implements Promotion {
 
     let oldPrice = 0;
     let counter = 0;
-    this.requiredItems.forEach((requiredProduct) => {
+    this.requiredItems.forEach(requiredProduct => {
       counter++;
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       const requiredAmount = this.requiredItems.getValue(requiredProduct)!;
@@ -97,7 +97,7 @@ export class BundlePromotion implements Promotion {
    */
   public doesCartHaveAllProducts(cart: Cart): boolean {
     let allProducts = true;
-    this.requiredItems.forEach((element) => {
+    this.requiredItems.forEach(element => {
       const reqAmount = this.getRequiredProductAmount(element);
       if (
         !cart.hasProduct(element) ||

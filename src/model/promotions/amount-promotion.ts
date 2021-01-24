@@ -1,6 +1,6 @@
-import { Promotion } from "./promotion";
-import { Product } from "../product";
-import { Cart } from "../cart";
+import {Promotion} from './promotion';
+import {Product} from '../product';
+import {Cart} from '../cart';
 
 /**
  * this promotion time assigns a special price if the product is repeated

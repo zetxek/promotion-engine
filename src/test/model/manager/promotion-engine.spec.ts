@@ -1,11 +1,11 @@
 import 'mocha';
 import 'should';
-import { Cart } from '../../../model/cart';
-import { Product } from '../../../model/product';
-import { BundlePromotion } from '../../../model/promotions/bundle-promotion';
-import { AmountPromotion } from '../../../model/promotions/amount-promotion';
+import {Cart} from '../../../model/cart';
+import {Product} from '../../../model/product';
+import {BundlePromotion} from '../../../model/promotions/bundle-promotion';
+import {AmountPromotion} from '../../../model/promotions/amount-promotion';
 import * as Collections from 'typescript-collections';
-import { DefaultPromotionEngine } from '../../../manager/promotion-engine';
+import {DefaultPromotionEngine} from '../../../manager/promotion-engine';
 
 describe('PromotionEngine', () => {
   let pA = new Product('A', 50);

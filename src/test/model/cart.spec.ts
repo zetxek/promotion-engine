@@ -1,23 +1,23 @@
-import "mocha";
-import "should";
+import 'mocha';
+import 'should';
 
-import { Cart } from "../../model/cart";
-import { Product } from "../../model/product";
+import {Cart} from '../../model/cart';
+import {Product} from '../../model/product';
 
-describe("Cart", () => {
+describe('Cart', () => {
   let tested: Cart;
   beforeEach(() => (tested = new Cart()));
 
-  describe("Creates an empty cart", () => {
-    it("should create an empty cart", () => {
+  describe('Creates an empty cart', () => {
+    it('should create an empty cart', () => {
       tested.getTotalCount().should.be.equal(0);
       tested.getUniqueCount().should.be.equal(0);
     });
   });
 
-  describe("Creates a cart and adds products", () => {
-    it("should add an item", () => {
-      const pB = new Product("B", 30);
+  describe('Creates a cart and adds products', () => {
+    it('should add an item', () => {
+      const pB = new Product('B', 30);
       tested.add(pB, 1);
 
       tested.getTotalCount().should.be.equal(1);
@@ -25,9 +25,9 @@ describe("Cart", () => {
     });
   });
 
-  describe("Creates a cart and updates/removes products", () => {
-    it("should add an item, allow add/remove operations", () => {
-      const pB = new Product("B", 30);
+  describe('Creates a cart and updates/removes products', () => {
+    it('should add an item, allow add/remove operations', () => {
+      const pB = new Product('B', 30);
       tested.add(pB, 1);
       tested.add(pB, 5);
 
@@ -40,8 +40,8 @@ describe("Cart", () => {
       tested.getTotalCount().should.be.equal(0);
     });
 
-    it("should handle item removal then amount = 0", () => {
-      const pB = new Product("B", 30);
+    it('should handle item removal then amount = 0', () => {
+      const pB = new Product('B', 30);
       tested.add(pB, 30);
       tested.remove(pB, 31);
 
@@ -50,7 +50,7 @@ describe("Cart", () => {
     });
 
     it("shouldn't allow negative ammounts", () => {
-      const pB = new Product("B", 30);
+      const pB = new Product('B', 30);
       tested.add(pB, 30);
       tested.remove(pB, 31);
       tested.getTotalCount().should.be.equal(0);

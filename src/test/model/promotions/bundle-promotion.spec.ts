@@ -1,15 +1,15 @@
-import "mocha";
-import "should";
-import { Cart } from "../../../model/cart";
-import { Product } from "../../../model/product";
-import { BundlePromotion } from "../../../model/promotions/bundle-promotion";
+import 'mocha';
+import 'should';
+import {Cart} from '../../../model/cart';
+import {Product} from '../../../model/product';
+import {BundlePromotion} from '../../../model/promotions/bundle-promotion';
 import * as Collections from 'typescript-collections';
 
-describe("BundlePromotion", () => {
+describe('BundlePromotion', () => {
   describe('BundlePromotion', () => {
-    it("should get a discount of 15", () => {
-      const pC = new Product("C", 20);
-      const pD = new Product("D", 15);
+    it('should get a discount of 15', () => {
+      const pC = new Product('C', 20);
+      const pD = new Product('D', 15);
 
       const discountedItems = new Collections.Dictionary<Product, number>();
       discountedItems.setValue(pC, 1);

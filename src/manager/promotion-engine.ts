@@ -1,5 +1,5 @@
-import { Cart } from "../model/cart";
-import { Promotion } from "../model/promotions/promotion";
+import {Cart} from '../model/cart';
+import {Promotion} from '../model/promotions/promotion';
 
 export interface PromotionEngine {
   getDiscountedPrice(cart: Cart, promotions: Promotion[]): number;
@@ -8,9 +8,9 @@ export interface PromotionEngine {
 export class DefaultPromotionEngine {
   public getDiscountedPrice(cart: Cart, promotions: Promotion[]): number {
     let discount = 0;
-    let discountedCart = cart.getCartClone();
+    let discountedCart = cart.clone();
 
-    promotions.forEach((promotion) => {
+    promotions.forEach(promotion => {
       if (promotion.isApplicable(discountedCart)) {
         const promotionResult = promotion.calculateDiscount(discountedCart);
         discount = discount + promotionResult[0];

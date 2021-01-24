@@ -1,6 +1,6 @@
-import { Product } from "./product";
+import {Product} from './product';
 import * as Collections from 'typescript-collections';
-import { HasOverview } from "../util/overview";
+import {HasOverview} from '../util/overview';
 
 export interface Cart {
   add(product: Product, amount: number): void;

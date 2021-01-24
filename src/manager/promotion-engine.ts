@@ -6,7 +6,7 @@ export interface PromotionEngine {
     getDiscountedPrice(cart: Cart, promotions : Promotion[]): number;
 }
 
-export class PromotionEngine {
+export class DefaultPromotionEngine {
     
     public getDiscountedPrice(cart: Cart, promotions: Promotion[]) : number {
         let discount = 0;

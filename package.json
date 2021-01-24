@@ -9,7 +9,8 @@
     "start": "npm run build -- -w",
     "start:dev": "nodemon",
     "lint": "eslint . --ext .ts",
-    "test": "mocha -r ts-node/register --recursive \"src/**/*.spec.ts\""
+    "test": "mocha -r ts-node/register --recursive \"src/**/*.spec.ts\"",
+    "coverage": "nyc npm run test"
   },
   "repository": {
     "type": "git",

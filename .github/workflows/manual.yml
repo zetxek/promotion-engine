@@ -1,4 +1,4 @@
-name: run_tests
+name: run_tests_manual
 on:
   workflow_dispatch:
 jobs:

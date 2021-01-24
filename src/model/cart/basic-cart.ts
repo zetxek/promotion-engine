@@ -1,18 +1,7 @@
-import {Product} from './product';
+import {Product} from '../product';
 import * as Collections from 'typescript-collections';
-import {HasOverview} from '../util/overview';
-
-export interface Cart {
-  add(product: Product, amount: number): void;
-  remove(product: Product, amount: number): void;
-  getUniqueCount(): number;
-  getTotalCount(): number;
-  getCartItems(): Collections.Dictionary<Product, number>;
-  getProductAmount(product: Product): number;
-  updateProductAmount(product: Product, newAmount: number): void;
-  updateProductPrice(product: Product, price: number): void;
-  clone(): Cart;
-}
+import {HasOverview} from '../../util/overview';
+import {Cart} from './cart';
 
 /**
  * This class keeps track of the items in the cart a shopping session.
@@ -25,7 +14,8 @@ export interface Cart {
  * @see add
  * @see remove
  */
-export class Cart implements Cart, HasOverview {
+
+export class BasicCart implements Cart, HasOverview {
   protected cartItems: Collections.Dictionary<Product, number>;
 
   constructor() {
@@ -124,18 +114,6 @@ export class Cart implements Cart, HasOverview {
     this.cartItems.setValue(product, amount);
   }
 
-  /**
-   * Returns the total price without any promotion considered
-   * @returns total price of the items in the cart
-   */
-  public getTotalPrice(): number {
-    let totalPrice = 0;
-    this.cartItems.forEach((product, amount) => {
-      totalPrice = totalPrice + product.price * amount;
-    });
-    return totalPrice;
-  }
-
   public hasProduct(product: Product): boolean {
     return this.getCartItems().containsKey(product);
   }
@@ -146,7 +124,7 @@ export class Cart implements Cart, HasOverview {
    * @returns (deep) copy of the instance
    */
   public clone(): Cart {
-    const newCart = new Cart();
+    const newCart = new BasicCart();
     this.cartItems.forEach((product, amount) => {
       newCart.add(product, amount);
     });

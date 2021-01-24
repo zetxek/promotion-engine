@@ -1,11 +1,13 @@
 import 'mocha';
 import 'should';
-import {Cart} from '../../../model/cart';
 import {Product} from '../../../model/product';
 import {BundlePromotion} from '../../../model/promotions/bundle-promotion';
 import {AmountPromotion} from '../../../model/promotions/amount-promotion';
 import * as Collections from 'typescript-collections';
 import {DefaultPromotionEngine} from '../../../manager/promotion-engine';
+import {Cart} from '../../../model/cart/cart';
+import {BasicCart} from '../../../model/cart/basic-cart';
+import {BasicCartPriceCalculator} from '../../../manager/cart-price-calculator';
 
 describe('PromotionEngine', () => {
   let pA = new Product('A', 50);
@@ -32,7 +34,7 @@ describe('PromotionEngine', () => {
   ];
 
   beforeEach(() => {
-    testCart = new Cart();
+    testCart = new BasicCart();
     promotionEngine = new DefaultPromotionEngine();
 
     pA = new Product('A', 50);
@@ -51,7 +53,8 @@ describe('PromotionEngine', () => {
         testCart,
         activePromotions
       );
-      const discountedPrice = testCart.getTotalPrice() - result;
+      const cartManager = new BasicCartPriceCalculator();
+      const discountedPrice = cartManager.getTotalPrice(testCart) - result;
       // 100 - 100
       discountedPrice.should.be.equal(100);
     });
@@ -65,7 +68,8 @@ describe('PromotionEngine', () => {
         testCart,
         activePromotions
       );
-      const discountedPrice = testCart.getTotalPrice() - result;
+      const cartManager = new BasicCartPriceCalculator();
+      const discountedPrice = cartManager.getTotalPrice(testCart) - result;
       // 420 vs 370
       discountedPrice.should.be.equal(370);
     });
@@ -80,7 +84,8 @@ describe('PromotionEngine', () => {
         testCart,
         activePromotions
       );
-      const discountedPrice = testCart.getTotalPrice() - result;
+      const cartManager = new BasicCartPriceCalculator();
+      const discountedPrice = cartManager.getTotalPrice(testCart) - result;
       // 335 vs 280
       discountedPrice.should.be.equal(280);
     });

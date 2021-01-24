@@ -1,9 +1,10 @@
 import 'mocha';
 import 'should';
-import {Cart} from '../../../model/cart';
+import * as Collections from 'typescript-collections';
+import {BasicCart} from '../../../model/cart/basic-cart';
+import {Cart} from '../../../model/cart/cart';
 import {Product} from '../../../model/product';
 import {BundlePromotion} from '../../../model/promotions/bundle-promotion';
-import * as Collections from 'typescript-collections';
 
 describe('BundlePromotion', () => {
   describe('BundlePromotion', () => {
@@ -17,7 +18,7 @@ describe('BundlePromotion', () => {
 
       const promotion = new BundlePromotion(discountedItems, 30);
 
-      const cart = new Cart();
+      const cart: Cart = new BasicCart();
       cart.add(pC, 1);
       cart.add(pD, 1);
 

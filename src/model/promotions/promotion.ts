@@ -1,6 +1,6 @@
-import {Cart} from '../cart';
 import * as Collections from 'typescript-collections';
 import {HasOverview} from '../../util/overview';
+import {Cart} from '../cart/cart';
 
 /**
  * A promotion is a type of discount applied in a cart.

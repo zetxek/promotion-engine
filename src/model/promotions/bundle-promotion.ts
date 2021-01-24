@@ -1,7 +1,7 @@
-import {Cart} from '../cart';
 import {Promotion} from './promotion';
 import * as Collections from 'typescript-collections';
 import {Product} from '../product';
+import {Cart} from '../cart/cart';
 
 /**
  * A bundle promotion requires a number of different products present in the cart,

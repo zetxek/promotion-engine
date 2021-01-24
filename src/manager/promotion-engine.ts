@@ -1,4 +1,4 @@
-import {Cart} from '../model/cart';
+import {Cart} from '../model/cart/cart';
 import {Promotion} from '../model/promotions/promotion';
 
 export interface PromotionEngine {

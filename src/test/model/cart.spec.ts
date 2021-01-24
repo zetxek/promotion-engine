@@ -1,12 +1,13 @@
 import 'mocha';
 import 'should';
+import {BasicCart} from '../../model/cart/basic-cart';
+import {Cart} from '../../model/cart/cart';
 
-import {Cart} from '../../model/cart';
 import {Product} from '../../model/product';
 
 describe('Cart', () => {
   let tested: Cart;
-  beforeEach(() => (tested = new Cart()));
+  beforeEach(() => (tested = new BasicCart()));
 
   describe('Creates an empty cart', () => {
     it('should create an empty cart', () => {

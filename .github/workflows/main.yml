@@ -44,4 +44,4 @@ jobs:
       env:
         CC_TEST_REPORTER_ID: ${{ CC_COVERATE_REPORTER }}
       with:
-        coverageCommand: npm coverage
+        coverageCommand: npm run coverage

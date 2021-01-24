@@ -1,7 +1,6 @@
-name: build
+name: run_tests
 on:
-  - workflow_dispatch
-  - push:
+  push:
     branches:
       - main
     tags:
@@ -11,9 +10,9 @@ on:
       - src/test/*
       - '*.json'
       - package-lock.json
-    pull_request:
-      paths:
-        - '!*.MD'
+  pull_request:
+    paths:
+      - '!*.MD'
 jobs:
   test:
     strategy:
